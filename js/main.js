@@ -1,16 +1,63 @@
 class GameApp {
     constructor() {
         console.log('GameApp constructor starting');
-        console.log('StorageManager available:', window.StorageManager);
-        this.storage = new StorageManager();
-        console.log('StorageManager created:', this.storage);
-        console.log('StorageManager methods:', Object.getOwnPropertyNames(Object.getPrototypeOf(this.storage)));
-        this.theme = new ThemeManager(this.storage);
-        this.audio = new AudioManager(this.storage);
-        this.ui = new UIManager();
-        this.input = new InputHandler();
-        this.achievements = new AchievementManager(this.storage);
-        this.share = new ShareManager();
+        
+        try {
+            this.storage = new StorageManager();
+            console.log('StorageManager created');
+        } catch (e) {
+            console.error('StorageManager init failed:', e);
+            this.storage = { getItem: () => null, setItem: () => {}, getSettings: () => ({ volume: 0.5, muted: false, showTutorial: true }), setSettings: () => {}, getTheme: () => 'classic', setTheme: () => {}, isFirstVisit: () => false, setFirstVisit: () => {} };
+        }
+        
+        try {
+            this.theme = new ThemeManager(this.storage);
+            console.log('ThemeManager created');
+        } catch (e) {
+            console.error('ThemeManager init failed:', e);
+            this.theme = { applyTheme: () => {}, getCurrentTheme: () => 'classic' };
+        }
+        
+        try {
+            this.audio = new AudioManager(this.storage);
+            console.log('AudioManager created');
+        } catch (e) {
+            console.error('AudioManager init failed:', e);
+            this.audio = { playClick: () => {}, playMerge: () => {}, playGameOver: () => {}, playWin: () => {} };
+        }
+        
+        try {
+            this.ui = new UIManager();
+            console.log('UIManager created');
+        } catch (e) {
+            console.error('UIManager init failed:', e);
+            this.ui = { showLoading: () => {}, hideLoading: () => {}, setLoadProgress: () => {}, el: {} };
+        }
+        
+        try {
+            this.input = new InputHandler();
+            console.log('InputHandler created');
+        } catch (e) {
+            console.error('InputHandler init failed:', e);
+            this.input = { on: () => {}, enable: () => {}, disable: () => {}, setup: () => {} };
+        }
+        
+        try {
+            this.achievements = new AchievementManager(this.storage);
+            console.log('AchievementManager created');
+        } catch (e) {
+            console.error('AchievementManager init failed:', e);
+            this.achievements = { markUnlocked: () => {} };
+        }
+        
+        try {
+            this.share = new ShareManager();
+            console.log('ShareManager created');
+        } catch (e) {
+            console.error('ShareManager init failed:', e);
+            this.share = {};
+        }
+        
         this.game = null;
         this.renderer = null;
         this.difficulty = 'normal';
@@ -19,6 +66,8 @@ class GameApp {
         this.processing = false;
         this.serverOnline = false;
         this.currentGameRecordId = null;
+        
+        console.log('All managers initialized, calling init()');
         this.init();
     }
     init() {
@@ -74,12 +123,31 @@ class GameApp {
         }
     }
     _start() {
+        console.log('_start called');
         setTimeout(() => {
-            this.ui.hideLoading();
-            this.ui.el['game-container']?.classList.remove('hidden');
-            this.newGame();
-            if (this.storage.isFirstVisit()) { this.ui.showTutorial(); this.storage.setFirstVisit(); }
-            if (window.api.isLoggedIn()) this._syncAchievements();
+            try {
+                console.log('Hiding loading screen');
+                this.ui.hideLoading();
+                console.log('Showing game container');
+                this.ui.el['game-container']?.classList.remove('hidden');
+                console.log('Creating new game');
+                this.newGame();
+                console.log('Checking first visit');
+                if (this.storage.isFirstVisit()) { 
+                    this.ui.showTutorial(); 
+                    this.storage.setFirstVisit(); 
+                }
+                console.log('Checking login status');
+                if (window.api && window.api.isLoggedIn) { 
+                    if (window.api.isLoggedIn()) this._syncAchievements(); 
+                }
+                console.log('Start complete');
+            } catch (e) {
+                console.error('Error in _start:', e);
+                // 即使出错也要隐藏加载界面
+                this.ui.hideLoading();
+                this.ui.el['game-container']?.classList.remove('hidden');
+            }
         }, 500);
     }
     async _syncAchievements() {
