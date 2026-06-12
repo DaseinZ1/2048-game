@@ -458,12 +458,12 @@ class GameApp {
             body.style.backgroundImage = '';
             body.style.backgroundColor = '#2d5016';
         } else if (skin === 'jialu1') {
-            body.style.backgroundImage = 'url("../4.jpg")';
+            body.style.backgroundImage = 'url("4.jpg")';
             body.style.backgroundSize = 'cover';
             body.style.backgroundPosition = 'center';
             body.style.backgroundColor = '';
         } else if (skin === 'jialu2') {
-            body.style.backgroundImage = 'url("../5.jpg")';
+            body.style.backgroundImage = 'url("5.jpg")';
             body.style.backgroundSize = 'cover';
             body.style.backgroundPosition = 'center';
             body.style.backgroundColor = '';
