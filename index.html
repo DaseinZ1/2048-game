@@ -25,13 +25,14 @@
 <nav class="nav-bar">
 <div class="nav-left"><span class="nav-title">2048</span></div>
 <div class="nav-right">
-<button id="leaderboard-btn" class="nav-btn" title="排行榜">🏆</button>
-<button id="achievements-btn" class="nav-btn" title="成就">🎯</button>
-<button id="settings-btn" class="nav-btn" title="设置">⚙️</button>
+<button id="leaderboard-btn" class="nav-btn" title="排行榜"><span class="nav-icon">🏆</span><span class="nav-text">排行榜</span></button>
+<button id="achievements-btn" class="nav-btn" title="成就"><span class="nav-icon">🎯</span><span class="nav-text">成就</span></button>
+<button id="settings-btn" class="nav-btn" title="设置"><span class="nav-icon">⚙️</span><span class="nav-text">设置</span></button>
+<button id="resume-btn" class="nav-btn" title="个人简历"><span class="nav-icon resume-icon"><img src="../3.png" alt="简历" class="resume-img"></span><span class="nav-text">个人简历</span></button>
 <span id="connection-status" class="connection-status">⚪ 本地模式</span>
 <div id="user-area" class="user-area">
 <button id="user-btn" class="nav-btn user-btn" title="用户">
-<div id="user-avatar" class="user-avatar">👤</div>
+<img src="../3.png" alt="用户" class="user-avatar-img">
 </button>
 <div id="user-panel" class="user-panel hidden">
 <div id="user-info" class="user-info hidden">
@@ -47,6 +48,7 @@
 </div>
 <div id="auth-forms" class="auth-forms">
 <div id="login-form" class="auth-form">
+<button id="login-close" class="close-btn" title="关闭">×</button>
 <h3>登录</h3>
 <input type="text" id="login-username" class="text-input" placeholder="用户名" />
 <input type="password" id="login-password" class="text-input" placeholder="密码" />
@@ -64,7 +66,7 @@
 <div class="avatar-selector">
     <span class="avatar-label">选择头像:</span>
     <div class="avatar-options">
-        <button class="avatar-option" data-avatar="👤" title="用户">👤</button>
+        <button class="avatar-option" data-avatar="custom" title="用户"><img src="../3.png" alt="用户" class="avatar-img"></button>
         <button class="avatar-option" data-avatar="🎮" title="游戏">🎮</button>
         <button class="avatar-option" data-avatar="🐱" title="猫咪">🐱</button>
         <button class="avatar-option" data-avatar="🚀" title="火箭">🚀</button>
@@ -129,6 +131,7 @@
 <h2>游戏暂停</h2>
 <button id="continue-game" class="btn">继续游戏</button>
 <button class="btn btn-secondary" onclick="gameApp.newGame()">重新开始</button>
+<button id="pause-resume-btn" class="btn btn-secondary">查看简历</button>
 </div>
 </div>
 </div>
@@ -137,7 +140,14 @@
 <div class="panel-content">
 <h3>游戏设置</h3>
 <div class="setting-group"><label>难度选择</label><select id="difficulty-select" class="select"><option value="easy">简单 (3x3)</option><option value="normal" selected>普通 (4x4)</option><option value="hard">困难 (5x5)</option></select></div>
-<div class="setting-group"><label>主题皮肤</label><select id="theme-select" class="select"><option value="classic" selected>经典</option><option value="dark">深色</option><option value="forest">森林</option></select></div>
+<div class="setting-group"><label>主题</label><select id="theme-select" class="select"><option value="classic" selected>经典</option><option value="dark">深色</option><option value="forest">森林</option></select></div>
+<div class="setting-group"><label>皮肤</label><div id="skin-options" class="skin-options">
+    <button class="skin-option" data-skin="classic" title="经典皮肤"><span class="skin-preview skin-preview-classic"></span><span class="skin-name">经典</span></button>
+    <button class="skin-option" data-skin="dark" title="深色皮肤"><span class="skin-preview skin-preview-dark"></span><span class="skin-name">深色</span></button>
+    <button class="skin-option" data-skin="forest" title="森林皮肤"><span class="skin-preview skin-preview-forest"></span><span class="skin-name">森林</span></button>
+    <button class="skin-option" data-skin="jialu1" title="伽罗-蓄势"><img src="../4.jpg" alt="伽罗-蓄势" class="skin-preview-img"><span class="skin-name">伽罗-蓄势</span></button>
+    <button class="skin-option" data-skin="jialu2" title="伽罗-独处"><img src="../5.jpg" alt="伽罗-独处" class="skin-preview-img"><span class="skin-name">伽罗-独处</span></button>
+</div></div>
 <div class="setting-group"><label>音量控制</label><div class="volume-control"><button id="mute-btn" class="btn-icon">🔊</button><input type="range" id="volume-slider" class="slider" min="0" max="1" step="0.1" value="0.5"></div></div>
 <div class="setting-group"><button id="reset-tutorial-btn" class="btn btn-secondary">重置操作引导</button></div>
 <button id="close-settings" class="btn">关闭</button>

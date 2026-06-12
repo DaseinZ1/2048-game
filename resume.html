@@ -3,73 +3,117 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>关于作者 - 2048游戏</title>
+<title>詹晨兴 - 个人简历</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Helvetica Neue',Arial,sans-serif;background:#faf8ef;color:#776e65;min-height:100vh;}
-.container{max-width:800px;margin:0 auto;padding:40px 20px;}
-.back-btn{display:inline-flex;align-items:center;gap:8px;margin-bottom:20px;background:#8f7a66;color:#fff;border:none;border-radius:5px;padding:10px 20px;font-size:16px;font-weight:bold;cursor:pointer;text-decoration:none;}
+body{font-family:'Helvetica Neue',Arial,sans-serif;background:#f5f5f5;color:#333;min-height:100vh;}
+.container{max-width:900px;margin:0 auto;padding:30px 20px;}
+.back-btn{display:inline-flex;align-items:center;gap:8px;margin-bottom:25px;background:#8f7a66;color:#fff;border:none;border-radius:6px;padding:10px 20px;font-size:16px;font-weight:bold;cursor:pointer;text-decoration:none;transition:background 0.3s;}
 .back-btn:hover{background:#9f8b77;}
-.header{text-align:center;margin-bottom:40px;}
-.avatar{width:120px;height:120px;border-radius:50%;background:#8f7a66;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:60px;}
-.name{font-size:32px;color:#776e65;margin-bottom:10px;}
-.title{font-size:18px;color:#776e65;margin-bottom:20px;}
-.section{background:#fff;border-radius:10px;padding:25px;margin-bottom:20px;border:1px solid #d6cdc4;}
-.section h2{color:#776e65;margin-bottom:15px;font-size:22px;border-bottom:2px solid #d6cdc4;padding-bottom:10px;}
-.section p{margin:8px 0;line-height:1.6;}
-.skill-tags{display:flex;flex-wrap:wrap;gap:10px;}
-.skill-tag{background:rgba(238,228,218,0.5);color:#776e65;padding:5px 15px;border-radius:20px;font-size:14px;}
-.project{margin-bottom:15px;}
-.project h4{color:#776e65;margin-bottom:5px;}
-.project p{color:#776e65;font-size:14px;line-height:1.5;}
-.contact{display:flex;flex-wrap:wrap;gap:15px;}
-.contact-item{color:#776e65;}
-.center{text-align:center;margin-top:30px;}
-.btn{background:#8f7a66;color:#fff;border:none;border-radius:5px;padding:10px 20px;font-size:16px;font-weight:bold;cursor:pointer;text-decoration:none;display:inline-block;}
-.btn:hover{background:#9f8b77;}
-@media(max-width:520px){.container{padding:20px 15px;}.name{font-size:24px;}.section{padding:20px;}}
+.header{display:flex;justify-content:space-between;align-items:flex-start;background:#fff;border-radius:12px;padding:25px 30px;margin-bottom:25px;box-shadow:0 2px 15px rgba(0,0,0,0.08);}
+.header-left{display:flex;gap:20px;align-items:center;}
+.avatar{width:120px;height:140px;border-radius:8px;object-fit:cover;border:2px solid #e0e0e0;}
+.personal-info{display:flex;flex-direction:column;gap:8px;}
+.name{font-size:28px;font-weight:bold;color:#2c3e50;margin:0;}
+.contact-list{display:flex;flex-wrap:wrap;gap:15px;font-size:14px;color:#666;}
+.contact-item{display:flex;align-items:center;gap:5px;}
+.location{color:#8f7a66;font-weight:500;}
+.header-right{display:flex;flex-direction:column;align-items:flex-end;gap:10px;}
+.school-badge{width:300px;height:90px;border-radius:8px;background:#fff;border:2px solid #8b4513;display:flex;align-items:center;justify-content:center;object-fit:cover;}
+.school-name{font-size:12px;color:#8b4513;text-align:center;max-width:120px;}
+.section{background:#fff;border-radius:12px;padding:25px 30px;margin-bottom:20px;box-shadow:0 2px 10px rgba(0,0,0,0.05);}
+.section-title{display:flex;align-items:center;gap:10px;color:#2c3e50;font-size:20px;font-weight:bold;margin-bottom:20px;padding-bottom:12px;border-bottom:3px solid #3498db;}
+.section-title::before{content:'';width:4px;height:20px;background:#3498db;border-radius:2px;}
+.education-item{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:15px;}
+.education-info h4{color:#2c3e50;font-size:16px;margin-bottom:5px;}
+.education-info p{color:#666;font-size:14px;margin:3px 0;}
+.skill-list{list-style:none;padding:0;}
+.skill-list li{position:relative;padding-left:20px;color:#555;font-size:14px;line-height:1.8;margin-bottom:10px;}
+.skill-list li::before{content:'•';position:absolute;left:0;color:#3498db;font-weight:bold;}
+.project-list{list-style:none;padding:0;}
+.project-item{padding:15px;background:#fafafa;border-radius:8px;margin-bottom:12px;}
+.project-item:last-child{margin-bottom:0;}
+.project-item a{color:#3498db;text-decoration:none;font-weight:500;}
+.project-item a:hover{text-decoration:underline;}
+.project-item span{color:#666;font-size:14px;margin-left:8px;}
+.footer{text-align:center;padding:20px;color:#888;font-size:14px;}
+@media(max-width:768px){
+    .header{flex-direction:column;align-items:flex-start;gap:20px;}
+    .header-right{align-items:flex-start;}
+    .contact-list{flex-direction:column;gap:5px;}
+    .name{font-size:24px;}
+    .section{padding:20px;}
+}
 </style>
 </head>
 <body>
 <div class="container">
 <a href="index.html" class="back-btn">← 返回游戏</a>
+
 <div class="header">
-<div class="avatar">👨‍💻</div>
-<h1 class="name">2048 游戏开发者</h1>
-<p class="title">前端开发爱好者 | 游戏开发学习者</p>
+    <div class="header-left">
+        <img src="../证件照.jpg" alt="詹晨兴" class="avatar">
+        <div class="personal-info">
+            <h1 class="name">詹晨兴</h1>
+            <div class="contact-list">
+                <span class="contact-item">📱 17306042501</span>
+                <span class="contact-item">📧 3414169133@qq.com</span>
+            </div>
+            <div class="location">📍 在读 · 福州</div>
+        </div>
+    </div>
+    <div class="header-right">
+        <img src="../校徽.png" alt="校徽" class="school-badge">
+        <div class="school-name">福州软件职业技术学院</div>
+    </div>
 </div>
+
 <div class="section">
-<h2>📝 基本信息</h2>
-<p><strong>身份：</strong>计算机相关专业学生</p>
-<p><strong>位置：</strong>中国</p>
-<p><strong>简介：</strong>热爱编程和游戏开发，正在学习前端技术和游戏设计。这款2048游戏是我的课程实践项目。</p>
+    <div class="section-title">📚 教育经历</div>
+    <div class="education-item">
+        <div class="education-info">
+            <h4>福州软件职业技术学院 | 人工智能技术应用 | 大专</h4>
+            <p>全日制 | 福州软件职业技术学院 | 福州长乐</p>
+            <p>获得计算机二级证书</p>
+        </div>
+        <span style="color:#8f7a66;font-weight:500;">2024-09 ~ 2027-06</span>
+    </div>
 </div>
+
 <div class="section">
-<h2>🛠️ 技能栈</h2>
-<div class="skill-tags">
-<span class="skill-tag">HTML5</span><span class="skill-tag">CSS3</span><span class="skill-tag">JavaScript</span><span class="skill-tag">Web Audio API</span><span class="skill-tag">Canvas API</span><span class="skill-tag">LocalStorage</span><span class="skill-tag">响应式设计</span><span class="skill-tag">Git</span>
+    <div class="section-title">💡 专业技能</div>
+    <ul class="skill-list">
+        <li>运用AI辅助工具高效完成2个全栈项目开发，实现前后端代码生成效率提升40%</li>
+        <li>通过AI代码补全工具优化开发流程，减少重复性编码工作，使项目交付周期缩短</li>
+        <li>采用AI测试工具自动化执行单元测试，提升代码覆盖率，缺陷率降低</li>
+        <li>利用AI性能分析工具识别系统瓶颈，优化关键API接口，减少响应时间</li>
+        <li>基于AI算法实现智能错误预警系统，提前发现并解决潜在问题，提升系统稳定性</li>
+        <li>整合AI文档生成工具，自动生成项目技术文档5+份，文档完整度达100%</li>
+    </ul>
 </div>
-</div>
+
 <div class="section">
-<h2>🎮 项目经历</h2>
-<div class="project">
-<h4>2048 益智游戏</h4>
-<p>功能完善的2048数字益智游戏，支持多种难度、主题切换、音效系统、排行榜、成就系统和分享功能。</p>
+    <div class="section-title">🎯 个人作品</div>
+    <ul class="project-list">
+        <li class="project-item">1. <a href="https://github.com/DaseinZ1/RAG-QA-System---2025011" target="_blank">RAG智能问答系统</a><span>链接: github.com/DaseinZ1/RAG-QA-System---2025011</span></li>
+        <li class="project-item">2. <a href="https://github.com/DaseinZ1/2048-game" target="_blank">2048游戏全栈项目</a><span>链接: github.com/DaseinZ1/2048-game</span></li>
+    </ul>
 </div>
-<div class="project">
-<h4>Web 前端开发学习</h4>
-<p>系统学习HTML、CSS、JavaScript，掌握DOM操作、事件处理、CSS动画、响应式设计等核心技术。</p>
-</div>
-</div>
+
 <div class="section">
-<h2>📞 联系方式</h2>
-<div class="contact">
-<span class="contact-item">📧 developer@example.com</span>
-<span class="contact-item">🐱 github.com/DaseinZ1</span>
+    <div class="section-title">🛠️ 技术栈</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;">
+        <span style="background:rgba(52,152,219,0.1);color:#3498db;padding:6px 14px;border-radius:20px;font-size:14px;">HTML5</span>
+        <span style="background:rgba(52,152,219,0.1);color:#3498db;padding:6px 14px;border-radius:20px;font-size:14px;">CSS3</span>
+        <span style="background:rgba(52,152,219,0.1);color:#3498db;padding:6px 14px;border-radius:20px;font-size:14px;">JavaScript</span>
+        <span style="background:rgba(52,152,219,0.1);color:#3498db;padding:6px 14px;border-radius:20px;font-size:14px;">Node.js</span>
+        <span style="background:rgba(52,152,219,0.1);color:#3498db;padding:6px 14px;border-radius:20px;font-size:14px;">Git</span>
+        <span style="background:rgba(52,152,219,0.1);color:#3498db;padding:6px 14px;border-radius:20px;font-size:14px;">AI工具</span>
+    </div>
 </div>
-</div>
-<div class="center">
-<a href="index.html" class="btn">🎮 去玩游戏</a>
+
+<div class="footer">
+    <p>© 2024 詹晨兴 | 个人简历</p>
 </div>
 </div>
 </body>

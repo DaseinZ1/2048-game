@@ -103,11 +103,14 @@ class GameApp {
         on('leaderboard-btn', () => { this.audio.playClick(); this._showLeaderboard(); });
         on('achievements-btn', () => { this.audio.playClick(); this._showAchievements(); });
         on('share-btn', () => { this.audio.playClick(); this._showShare(); });
+        on('resume-btn', () => { this.audio.playClick(); this._goToResume(); });
+        on('pause-resume-btn', () => { this.audio.playClick(); this._goToResume(); });
         on('user-btn', () => { this.audio.playClick(); this.ui.toggleUserPanel(); });
         on('login-submit', () => { this.audio.playClick(); this._login(); });
         on('register-submit', () => { this.audio.playClick(); this._register(); });
         on('show-register', () => { this.audio.playClick(); this.ui.showRegisterForm(); });
         on('show-login', () => { this.audio.playClick(); this.ui.showLoginForm(); });
+        on('login-close', () => { this.audio.playClick(); this.ui.hideUserPanel(); });
         on('logout-btn', () => { this.audio.playClick(); this._logout(); });
         on('switch-account-btn', () => { this.audio.playClick(); this._switchAccount(); });
         on('close-tutorial', () => {
@@ -118,6 +121,15 @@ class GameApp {
         });
         document.getElementById('difficulty-select')?.addEventListener('change', e => { this.difficulty = e.target.value; this.newGame(); });
         document.getElementById('theme-select')?.addEventListener('change', e => this.theme.applyTheme(e.target.value));
+        document.querySelectorAll('.skin-option')?.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                this.audio.playClick();
+                const skin = e.currentTarget.getAttribute('data-skin');
+                this._applySkin(skin);
+                document.querySelectorAll('.skin-option').forEach(b => b.classList.remove('selected'));
+                e.currentTarget.classList.add('selected');
+            });
+        });
         document.getElementById('volume-slider')?.addEventListener('input', e => this.audio.setVolume(parseFloat(e.target.value)));
         on('mute-btn', () => { const muted = this.audio.toggleMute(); const btn = document.getElementById('mute-btn'); if (btn) btn.textContent = muted ? '🔇' : '🔊'; });
         on('reset-tutorial-btn', () => { const s = this.storage.getSettings(); s.showTutorial = true; this.storage.setSettings(s); alert('操作引导已重置'); });
@@ -345,6 +357,33 @@ class GameApp {
         this.ui.showLeaderboard(entries, () => this._showLeaderboard(), () => { if (confirm('确定清空当前难度排行榜？')) { this.storage.clearLeaderboard(this.difficulty); this._showLeaderboard(); } });
     }
     _showAchievements() { this.ui.showAchievements(this.achievements.getAll()); }
+    _goToResume() { window.location.href = 'resume.html'; }
+    _applySkin(skin) {
+        const body = document.body;
+        if (skin === 'classic') {
+            body.style.backgroundImage = '';
+            body.style.backgroundColor = '';
+        } else if (skin === 'dark') {
+            body.style.backgroundImage = '';
+            body.style.backgroundColor = '#1a1a2e';
+        } else if (skin === 'forest') {
+            body.style.backgroundImage = '';
+            body.style.backgroundColor = '#2d5016';
+        } else if (skin === 'jialu1') {
+            body.style.backgroundImage = 'url("../4.jpg")';
+            body.style.backgroundSize = 'cover';
+            body.style.backgroundPosition = 'center';
+            body.style.backgroundColor = '';
+        } else if (skin === 'jialu2') {
+            body.style.backgroundImage = 'url("../5.jpg")';
+            body.style.backgroundSize = 'cover';
+            body.style.backgroundPosition = 'center';
+            body.style.backgroundColor = '';
+        }
+        const settings = this.storage.getSettings();
+        settings.skin = skin;
+        this.storage.setSettings(settings);
+    }
     _showShare() {
         const score = this.game ? this.game.getScore() : 0;
         const time = this.game ? this.game.getTimeElapsed() : 0;
