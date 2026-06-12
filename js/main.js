@@ -24,13 +24,33 @@ class GameApp {
     init() {
         this.ui.showLoading();
         this._checkServerConnection();
+        
         let p = 0;
+        let attempts = 0;
+        const maxAttempts = 20; // 最多尝试20次，确保能完成加载
+        
         const iv = setInterval(() => {
+            attempts++;
             p += Math.random() * 30;
-            if (p >= 100) { p = 100; clearInterval(iv); this._start(); }
+            
+            // 确保进度至少每次增加5%，防止卡住
+            if (p < attempts * 5) {
+                p = attempts * 5;
+            }
+            
+            if (p >= 100 || attempts >= maxAttempts) { 
+                p = 100; 
+                clearInterval(iv); 
+                this._start(); 
+            }
             this.ui.setLoadProgress(p);
         }, 200);
-        this._bindEvents();
+        
+        try {
+            this._bindEvents();
+        } catch (e) {
+            console.error('绑定事件失败:', e);
+        }
     }
     async _checkServerConnection() {
         try {
