@@ -7,6 +7,18 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<script>
+// 确保加载界面一定会消失的安全机制
+setTimeout(function() {
+    var loadingScreen = document.getElementById('loading-screen');
+    var gameContainer = document.getElementById('game-container');
+    if (loadingScreen && gameContainer) {
+        loadingScreen.style.display = 'none';
+        gameContainer.classList.remove('hidden');
+        console.log('Fallback: loading screen hidden by timeout');
+    }
+}, 8000); // 8秒后强制关闭加载界面
+</script>
 <div id="loading-screen" class="loading-screen">
 <div class="loading-content">
 <h1 class="loading-title">2048</h1>

@@ -71,18 +71,18 @@ class GameApp {
         this.init();
     }
     init() {
+        console.log('init() called');
         this.ui.showLoading();
         this._checkServerConnection();
         
         let p = 0;
         let attempts = 0;
-        const maxAttempts = 20; // 最多尝试20次，确保能完成加载
+        const maxAttempts = 20;
         
         const iv = setInterval(() => {
             attempts++;
             p += Math.random() * 30;
             
-            // 确保进度至少每次增加5%，防止卡住
             if (p < attempts * 5) {
                 p = attempts * 5;
             }
@@ -94,6 +94,13 @@ class GameApp {
             }
             this.ui.setLoadProgress(p);
         }, 200);
+        
+        // 添加一个强制超时机制，确保加载界面一定会消失
+        setTimeout(() => {
+            console.log('Force timeout triggered');
+            clearInterval(iv);
+            this._start();
+        }, 10000); // 10秒强制超时
         
         try {
             this._bindEvents();
